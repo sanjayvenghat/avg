@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ans,.avg{
+            color: green
+        } 
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>mark one</p>
+        <input class="one" type="text">
+        <p>mark two</p>
+        <input class="two" type="text">
+        <p>mark three</p>
+        <input class="three" type="text">
+        <p>mark four</p>
+        <input class="four" type="text">
+        <div><a href="#">click here</a></div>
+       
+        <p class="ans"></p> 
+        <p class="avg"></p>
+    </div>
+</body>
+<script>
+    let values = document.querySelectorAll("input");
+    let storing = Array.from(values);
+
+    document.querySelector("a").addEventListener("click", (event) => {
+        event.preventDefault(); 
+        let values_storing = 0; 
+        let ans = document.querySelector(".ans");
+        let avg = document.querySelector(".avg");
+        
+        storing.forEach((value) => {
+            try {
+                let new_new = parseInt(value.value); 
+                values_storing += new_new; 
+                avg.textContent = values_storing / storing.length; 
+                ans.textContent = values_storing; 
+                
+                if (isNaN(new_new))
+                {
+                    throw "error";
+                }
+            } catch(error) {
+                ans.textContent = "Enter a valid input";
+                avg.textContent = "Enter a valid input"; 
+                
+                
+               
+                let style = document.createElement("style");
+                style.textContent = ".ans, .avg { color: red; }";
+                document.head.appendChild(style);
+                
+            } 
+            setTimeout(() => {
+                ans.textContent = "";
+                avg.textContent = "";
+                document.querySelector(".ans, .avg").forEach(el => el.style.color = "");
+               
+            }, 2000);
+        });
+    });
+</script>
+</html>
